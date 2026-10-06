@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>APEX</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1428;--card:#101e3a;--line:#223459;--text:#eef3ff;--mute:#9fb0d0;--blue:#2e7bff;--blue-ink:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f2f6ff;--card:#fff;--line:#d3dcf0;--text:#0a1428;--mute:#53628a}}
+:root[data-theme="light"]{--bg:#f2f6ff;--card:#fff;--line:#d3dcf0;--text:#0a1428;--mute:#53628a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.5 Barlow,system-ui,sans-serif}
+main{max-width:980px;margin:0 auto;padding:28px 18px 56px}
+header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:34px}
+.brand{font:700 26px/1 "Barlow Condensed",Impact,sans-serif;letter-spacing:.02em}
+nav{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px}
+nav a{padding:8px 18px;border-radius:999px;color:var(--mute);text-decoration:none;font-weight:600}
+nav a[aria-current=page]{background:var(--blue);color:var(--blue-ink)}
+h1{font:700 clamp(40px,8vw,68px)/.95 "Barlow Condensed",Impact,sans-serif;margin:0 0 10px}
+.sub{color:var(--mute);max-width:52ch;margin:0 0 30px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:6px}
+.card.feat{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.card h2{font:700 28px/1.05 "Barlow Condensed",Impact,sans-serif;margin:0}
+.price{font:700 38px/1 "Barlow Condensed",Impact,sans-serif;color:var(--blue);margin-top:4px}
+.price small{font:500 15px Barlow,sans-serif;color:var(--mute)}
+.card p{margin:0 0 14px;color:var(--mute);flex:1}
+.btn{display:block;text-align:center;padding:12px 16px;border-radius:10px;background:var(--blue);color:var(--blue-ink);font-weight:600;text-decoration:none}
+.btn:hover{filter:brightness(1.1)}
+.btn:focus-visible,nav a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
+.btn.off{background:transparent;border:1px dashed var(--line);color:var(--mute);pointer-events:none}
+.note{margin-top:26px;color:var(--mute);font-size:14px}
+.policy{margin-top:22px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--mute);font-size:14px}
+.policy b{color:var(--text)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 30px}.cta .btn{display:inline-block;min-width:200px}
+.btn.alt{background:transparent;border:1px solid var(--blue);color:var(--text)}
+.hero{padding:6px 0 4px}
+.eyebrow{font:600 13px Barlow,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.sec{font:700 22px/1 "Barlow Condensed",Impact,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin:34px 0 12px}
+.tiles{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.tile{display:flex;flex-direction:column;gap:2px;padding:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;color:var(--text);text-decoration:none}
+.tile:hover{border-color:var(--blue)}.tile:focus-visible{outline:3px solid var(--text);outline-offset:2px}
+.tile .ico{font-size:26px;margin-bottom:6px}.tile b{font:700 22px/1.1 "Barlow Condensed",Impact,sans-serif}.tile small{color:var(--mute);font-size:14px}
+.list{display:grid;gap:8px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:12px;color:var(--text);text-decoration:none}
+.row:hover{border-color:var(--blue)}.row.feat{border-color:var(--blue)}
+.row b{font:700 20px/1.1 "Barlow Condensed",Impact,sans-serif}.row span{color:var(--blue);font:700 22px/1 "Barlow Condensed",Impact,sans-serif;white-space:nowrap}.row small{display:block;color:var(--mute);font:400 14px Barlow,sans-serif}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));counter-reset:s}
+.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:2px}
+.steps li:before{content:counter(s);font:700 30px/1 "Barlow Condensed",Impact,sans-serif;color:var(--blue)}
+.steps b{font:700 20px "Barlow Condensed",Impact,sans-serif}.steps span{color:var(--mute);font-size:14px}
+[hidden]{display:none}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="brand">APEX</div>
+  <nav aria-label="Pages"><a href="#home" id="n-home">Home</a><a href="#pay" id="n-pay">Pay</a><a href="#schedule" id="n-schedule">Schedule</a><a href="#about" id="n-about">About</a></nav>
+</header>
+
+<section id="home" hidden>
+  <div class="hero">
+    <div class="eyebrow">Apex Performance · New Jersey</div>
+    <h1>Train like an athlete.</h1>
+    <p class="sub">Personal training and sports performance coaching, in person and online. Coached by a CSCS-certified strength and conditioning specialist with an Exercise Science degree.</p>
+    <div class="cta"><a class="btn" href="#schedule">Book a session</a><a class="btn alt" href="#pay">View programs &amp; pay</a></div>
+  </div>
+  <h3 class="sec">Quick start</h3>
+  <div class="tiles">
+    <a class="tile" href="#schedule"><span class="ico" aria-hidden="true">📅</span><b>Book a time</b><small>Pick a slot on the calendar</small></a>
+    <a class="tile" href="#pay"><span class="ico" aria-hidden="true">💳</span><b>Pay</b><small>Secure checkout with Stripe</small></a>
+    <a class="tile" href="#pay"><span class="ico" aria-hidden="true">🏋️</span><b>Programs</b><small>1-on-1, group, online</small></a>
+  </div>
+  <h3 class="sec">Programs</h3>
+  <div class="list" id="homeList"></div>
+  <h3 class="sec">How it works</h3>
+  <ol class="steps">
+    <li><b>Choose</b><span>Pick the program that fits your goals.</span></li>
+    <li><b>Pay</b><span>Check out securely with Stripe.</span></li>
+    <li><b>Book</b><span>Select your times and show up ready to train.</span></li>
+  </ol>
+  <p class="policy"><b>Cancellation policy:</b> You have 2 hours to cancel. After that, you are billed.</p>
+</section>
+
+<section id="about" hidden>
+  <div class="eyebrow">About</div>
+  <h1>Coached by someone who's been there.</h1>
+  <p class="sub">Apex Performance is personal training and sports performance coaching based in New Jersey. Sessions are built around your sport, your body, and your goals, in person or online.</p>
+  <div class="grid">
+    <article class="card"><h2>Credentials</h2><p>CSCS (Certified Strength and Conditioning Specialist) with a Bachelor's degree in Exercise Science.</p></article>
+    <article class="card"><h2>Experience</h2><p>5+ years of training, including time as a performance coach at Power Train.</p></article>
+    <article class="card"><h2>Athlete first</h2><p>Former college football player and team captain. I know what it takes to prepare, compete, and lead.</p></article>
+  </div>
+  <h3 class="sec">What we focus on</h3>
+  <ul class="steps">
+    <li><b>Strength</b><span>Build a strong, durable base.</span></li>
+    <li><b>Speed &amp; power</b><span>Sprint, jump, and change direction better.</span></li>
+    <li><b>Sport-specific</b><span>Programming matched to your position and season.</span></li>
+  </ul>
+  <div class="cta" style="margin-top:28px"><a class="btn" href="#schedule">Book a session</a><a class="btn alt" href="#pay">View programs &amp; pay</a></div>
+</section>
+
+<section id="pay" hidden>
+  <h1>Pick a program and pay</h1>
+  <p class="sub">Choose how you want to train. You'll check out securely with Stripe, then pick your times on the Schedule page.</p>
+  <div class="grid" id="payGrid"></div>
+  <p class="policy"><b>Cancellation policy:</b> You have 2 hours to cancel. After that, you are billed. Weekly plans (one-on-one, small group, online) renew every week until you cancel.</p>
+</section>
+
+<section id="schedule" hidden>
+  <h1>Book your times</h1>
+  <p class="sub">Already paid? Pick the same program below and choose a time on the calendar.</p>
+  <div class="grid" id="schedGrid"></div>
+  <p class="policy"><b>Cancellation policy:</b> You have 2 hours to cancel. After that, you are billed. Weekly plans (one-on-one, small group, online) renew every week until you cancel.</p>
+</section>
+<p class="note" id="setup" hidden>Setup needed: paste your Stripe Payment Link and calendar booking URLs into the CONFIG block at the top of the script.</p>
+</main>
+
+<script>
+/* ---- CONFIG: paste your links here ---- */
+const CONFIG = {
+  calendarDefault: "https://calendar.app.google/T7wpvQ6QrbeRc8Pt6",            // e.g. your Google Calendar appointment page or Calendly link
+  plans: [
+    {id:"single",  name:"Single session",       price:"$50",  per:"one session",   blurb:"One 1-on-1 session. Good for a first visit or a tune-up.", stripe:"https://buy.stripe.com/5kQ3cu2UtbOg4yt2BaeZ20k", calendar:""},
+    {id:"oneonone",name:"One-on-one training",  price:"$140", per:"per week, 3x/week", blurb:"Fully individual coaching, built around your sport and goals.", stripe:"https://buy.stripe.com/dRm3cu2Ut05yd4Z0t2eZ20l", calendar:""},
+    {id:"group",   name:"Small group training", price:"$110", per:"per week, 3x/week", blurb:"Train with a small group of athletes at a lower weekly rate.", stripe:"https://buy.stripe.com/dRmcN49iR19C0id2BaeZ20m", calendar:""},
+    {id:"online",  name:"Online training",      price:"$50", per:"per week", blurb:"Custom programming you follow on your own schedule, with coach check-ins.", stripe:"https://buy.stripe.com/3cI3cudz77y05Cx4JieZ20e", calendar:""},
+    {id:"fourweek",name:"Four-week session",    price:"$450", per:"4 weeks total", blurb:"The full four-week package. Saves $110 versus paying weekly.", stripe:"https://buy.stripe.com/7sYaEW1Qp7y06GBb7GeZ20o", calendar:"", feat:true}
+  ]
+};
+/* --------------------------------------- */
+const $ = s => document.querySelector(s);
+function card(p, kind){
+  const url = kind==="pay" ? p.stripe : (p.calendar || CONFIG.calendarDefault);
+  const label = kind==="pay" ? "Pay now" : "Pick a time";
+  const off = kind==="pay" ? "Payment link not set" : "Calendar link not set";
+  return `<article class="card${p.feat?" feat":""}"><h2>${p.name}</h2>
+  ${kind==="pay"?`<div class="price">${p.price} <small>${p.per}</small></div>`:""}
+  <p>${p.blurb}</p>
+  ${url?`<a class="btn" href="${url}" target="_blank" rel="noopener">${label}</a>`:`<span class="btn off">${off}</span>`}</article>`;
+}
+$("#homeList").innerHTML = CONFIG.plans.map(p=>`<a class="row${p.feat?" feat":""}" href="#pay"><div><b>${p.name}</b><small>${p.per}</small></div><span>${p.price}</span></a>`).join("");
+$("#payGrid").innerHTML = CONFIG.plans.map(p=>card(p,"pay")).join("");
+$("#schedGrid").innerHTML = CONFIG.plans.map(p=>card(p,"sched")).join("");
+$("#setup").hidden = CONFIG.plans.every(p=>p.stripe) && (CONFIG.calendarDefault || CONFIG.plans.every(p=>p.calendar));
+function route(){
+  const page = location.hash === "#schedule" ? "schedule" : location.hash === "#pay" ? "pay" : location.hash === "#about" ? "about" : "home";
+  ["home","pay","schedule","about"].forEach(id=>{
+    $("#"+id).hidden = id!==page;
+    const a=$("#n-"+id); id===page ? a.setAttribute("aria-current","page") : a.removeAttribute("aria-current");
+  });
+}
+addEventListener("hashchange", route); route();
+</script>
+</body>
+</html>
